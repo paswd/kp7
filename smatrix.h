@@ -3,13 +3,16 @@
 
 #include <stdbool.h>
 
-typedef double complex Item;
+//typedef Complex Item;
 
+//typedef struct _note Note;
 typedef struct _smatrix Smatrix;
 
 Smatrix *smatrix_create();
 void smatrix_destroy(Smatrix **matrix); 
 
-
+void smatrix_fill(Smatrix *matrix);
+void smatrix_print_mach(Smatrix *matrix);
+void smatrix_print_basic(Smatrix *matrix);
 
 #endif

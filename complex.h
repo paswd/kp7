@@ -1,5 +1,5 @@
-#ifndef _SMATRIX_H_
-#define _SMATRIX_H_
+#ifndef _COMPLEX_H_
+#define _COMPLEX_H_
 
 #include <stdbool.h>
 
@@ -24,6 +24,6 @@ Complex complex_composition(Complex num1, Complex num2);
 void complex_print(Complex num);
 
 Complex complex_set_value(char *str, size_t start);
-
+bool complex_is_zero(Complex num);
 
 #endif

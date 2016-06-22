@@ -66,16 +66,17 @@ void complex_print(Complex num)
 	if (num.re != 0)
 		printf("%lf", num.re);
 	if (num.im == 0) {
-		printf("\n");
+		//printf("\n");
 		return;
 	}
 	if (num.im > 0 && num.re != 0)
 		printf("+");
-	printf("%lfi\n", num.im);
+	printf("%lfi", num.im);
 }
 
 Complex complex_set_value(char *str, size_t start)
 {
+	//printf("%s\n", str);
 	Complex res;
 	res.re = 0;
 	res.im = 0;
@@ -88,7 +89,7 @@ Complex complex_set_value(char *str, size_t start)
 	int cnt = 0;
 
 	while (str[i] != EOF && str[i] != '\0' && !is_space(str[i])) {
-		printf("%d\n", cnt);
+		//printf("%d\n", cnt);
 		cnt++;
 		if (str[i] == '-') {
 			if (i == start)
@@ -114,6 +115,9 @@ Complex complex_set_value(char *str, size_t start)
 		if (str[i] == 'i' || str[i] == 'I') {
 			tmp[pos] = '\0';
 			res.im = StrToInt(tmp, 0);
+			if (res.im == 0)
+				res.im = 1;
+			is_re = false;
 		}
 		tmp[pos] = str[i];
 		pos++;
@@ -127,4 +131,9 @@ Complex complex_set_value(char *str, size_t start)
 	if (is_im_minus)
 		res.im = -res.im;
 	return res;
+}
+
+bool complex_is_zero(Complex num)
+{
+	return num.re == 0 && num.im == 0;
 }
