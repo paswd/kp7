@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <math.h>
 #include "complex.h"
 
 #define STR_SIZE_BASIC 1024
@@ -26,6 +27,12 @@ int StrToInt(char *str, int start)
 		i++;
 	}
 
+	return num;
+}
+double d_abs(double num)
+{
+	if (num < 0.0)
+		num = -num;
 	return num;
 }
 
@@ -56,22 +63,35 @@ Complex complex_composition(Complex num1, Complex num2)
 	res.im = num1.re * num2.im + num2.re * num1.im;
 	return res;
 }
+Complex complex_quotient(Complex num1, Complex num2)
+{
+	Complex res;
+	res.re = (num1.re * num2.re + num1.im * num2.im) / (num2.re * num2.re + num2.im * num2.im);
+	res.im = (num2.re * num1.im - num2.im * num2.re) / (num2.re * num2.re + num2.im * num2.im);
+	return res;
+}
+
+double complex_distance(Complex num1, Complex num2)
+{
+	return sqrt((num1.re - num2.re) * (num1.re - num2.re) + (num1.im - num2.im) * (num1.im - num2.im)); 
+}
+
 void complex_print(Complex num)
 {
 	if (num.re == 0 && num.im == 0) {
 		printf("0\n");
 		return;
 	}
-	//printf("%.0lf+%.0lfi", num.re, num.im);
+	//printf("%.2lf+%.2lfi", num.re, num.im);
 	if (num.re != 0)
-		printf("%.0lf", num.re);
+		printf("%.2lf", num.re);
 	if (num.im == 0) {
 		//printf("\n");
 		return;
 	}
 	if (num.im > 0 && num.re != 0)
 		printf("+");
-	printf("%.0lfi", num.im);
+	printf("%.2lfi", num.im);
 }
 
 Complex complex_set_value(char *str, int start)

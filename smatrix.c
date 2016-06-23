@@ -130,3 +130,55 @@ void smatrix_print_basic(Smatrix *matrix)
 		prev_pos = matrix->arr[i].col_num;
 	}
 }
+
+void smatrix_quotient(Smatrix *matrix, Complex num, int curr_row, int curr_col)
+{
+	int col = 0;
+	int row = 0;
+	for (int i = 0; i < matrix->size; i++) {
+		if (matrix->arr[i].col_num == 0) {
+			col = 1;
+			row = matrix->arr[i].value.row_num;
+			continue;
+		}
+		if (col == curr_col || row == curr_row)
+			matrix->arr[i].value.num = complex_quotient(matrix->arr[i].value.num, num);
+		col++;
+	}
+}
+void smatrix_div_on_nearests(Smatrix *matrix, Complex num)
+{
+	//Complex ths_complex;
+	//ths_complex.re = 0;
+	//ths_complex.im = 0;
+	int tmp_col = 0;
+	int tmp_row = 0;
+	double min = -1.0;
+	double tmp_min;
+	for (int i = 0; i < matrix->size; i++) {
+		if (matrix->arr[i].col_num == 0) {
+			tmp_col = 1;
+			tmp_row = matrix->arr[i].value.row_num;
+			continue;
+		}
+		if ((tmp_min = complex_distance(num, matrix->arr[i].value.num)) < min || min == -1.0) {
+			min = tmp_min;
+			//ths_complex = matrix->arr[i].value.num;
+		}
+		tmp_col++;
+	}
+	tmp_col = 0;
+	tmp_row = 0;
+	for (int i = 0; i < matrix->size; i++) {
+		if (matrix->arr[i].col_num == 0) {
+			tmp_col = 1;
+			tmp_row = matrix->arr[i].value.row_num;
+			continue;
+		}
+		if (complex_distance(num, matrix->arr[i].value.num) == min)
+			smatrix_quotient(matrix, matrix->arr[i].value.num, tmp_row, tmp_col);
+
+		tmp_col++;
+	}
+	//return ths_complex;
+}

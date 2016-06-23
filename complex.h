@@ -7,6 +7,7 @@ bool is_space(char sym);
 
 int CharToInt(char sym);
 int StrToInt(char *str, int start);
+double d_abs(double num);
 
 //typedef double complex Item;
 typedef double Element;
@@ -21,6 +22,8 @@ void complex_destroy(Complex **num);
 
 Complex complex_summ(Complex num1, Complex num2);
 Complex complex_composition(Complex num1, Complex num2);
+Complex complex_quotient(Complex num1, Complex num2);
+double complex_distance(Complex num1, Complex num2);
 void complex_print(Complex num);
 
 Complex complex_set_value(char *str, int start);

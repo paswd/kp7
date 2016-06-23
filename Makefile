@@ -1,4 +1,4 @@
-FLAGS=-Wextra -Wall -Werror -pedantic -std=c99
+FLAGS=-Wextra -Wall -Werror -pedantic -std=c99 -lm
 
 all: start
 
