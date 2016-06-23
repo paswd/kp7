@@ -11,6 +11,8 @@ int main()
 	Smatrix *matrix = smatrix_create();
 	smatrix_fill(matrix);
 	smatrix_print_mach(matrix);
+	printf("----------\n");
+	smatrix_print_basic(matrix);
 	smatrix_destroy(&matrix);
 	return 0;
 }

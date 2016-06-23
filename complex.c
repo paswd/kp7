@@ -17,10 +17,10 @@ int CharToInt(char sym)
 {
 	return sym - '0';
 }
-int StrToInt(char *str, size_t start)
+int StrToInt(char *str, int start)
 {
 	int num = 0;
-	size_t i = start;
+	int i = start;
 	while (!is_space(str[i])) {
 		num += num * 10 + CharToInt(str[i]);
 		i++;
@@ -62,19 +62,19 @@ void complex_print(Complex num)
 		printf("0\n");
 		return;
 	}
-	//printf("%lf+%lfi", num.re, num.im);
+	//printf("%.0lf+%.0lfi", num.re, num.im);
 	if (num.re != 0)
-		printf("%lf", num.re);
+		printf("%.0lf", num.re);
 	if (num.im == 0) {
 		//printf("\n");
 		return;
 	}
 	if (num.im > 0 && num.re != 0)
 		printf("+");
-	printf("%lfi", num.im);
+	printf("%.0lfi", num.im);
 }
 
-Complex complex_set_value(char *str, size_t start)
+Complex complex_set_value(char *str, int start)
 {
 	//printf("%s\n", str);
 	Complex res;
@@ -84,8 +84,8 @@ Complex complex_set_value(char *str, size_t start)
 	bool is_im_minus;
 	bool is_re = true;
 	char *tmp = (char *) calloc(STR_SIZE_BASIC, sizeof(char));
-	size_t i = start;
-	size_t pos = 0;
+	int i = start;
+	int pos = 0;
 	int cnt = 0;
 
 	while (str[i] != EOF && str[i] != '\0' && !is_space(str[i])) {

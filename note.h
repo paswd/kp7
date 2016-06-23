@@ -7,10 +7,10 @@
 typedef Complex Numeral;
 
 typedef struct {
-	size_t col_num;
+	int col_num;
 	union Value {
 		Numeral num;
-		size_t row_num;
+		int row_num;
 	} value;
 	//bool is_first_el;
 } Note;

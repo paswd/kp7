@@ -9,8 +9,8 @@
 
 struct _smatrix {
 	Note *arr;
-	size_t size;
-	size_t max_width;
+	int size;
+	int max_width;
 };
 
 Smatrix *smatrix_create(void) {
@@ -31,16 +31,16 @@ void smatrix_fill(Smatrix *matrix)
 {
 	int sym;
 	char tmp_str[2048];
-	size_t i = 0;
+	int i = 0;
 	Queue *queue = queue_create();
 	Note tmp;
 	tmp.col_num = 0;
 	//tmp.is_first_el = true;
 	tmp.value.row_num = 1;
 	queue_push(queue, tmp);
-	size_t queue_cnt = 1;
-	size_t col = 1;
-	size_t row = 1;
+	int queue_cnt = 1;
+	int col = 1;
+	int row = 1;
 	Complex tmp_complex;
 	matrix->max_width = 0;
 
@@ -88,20 +88,41 @@ void smatrix_fill(Smatrix *matrix)
 
 void smatrix_print_mach(Smatrix *matrix)
 {
-	for (size_t i = 0; i < matrix->size; i++) {
-		printf("%lu ", matrix->arr[i].col_num);
+	for (int i = 0; i < matrix->size; i++) {
+		printf("%d ", matrix->arr[i].col_num);
 		if (matrix->arr[i].col_num == 0)
-			printf("%lu", matrix->arr[i].value.row_num);
+			printf("%d", matrix->arr[i].value.row_num);
 		else
 			complex_print(matrix->arr[i].value.num);
 		printf("\n");
 	}
 }
-/*void smatrix_print_basic(Smatrix *matrix)
+void smatrix_print_basic(Smatrix *matrix)
 {
-	size_t pos = 1;
-	size_t prev_pos = 0;
-	for (size_t i = 0; i < matrix->size; i++) {
-		if (matrix->arr[i].col_num == 0)
+	//int pos = 0;
+	int prev_pos = 0;
+	for (int i = 0; i < matrix->size; i++) {
+		//printf("%d:", i);
+		if (matrix->arr[i].col_num == 0) {
+			if (matrix->arr[i].value.row_num == 1) {
+				continue;
+			}
+			for (int j = 0; j < matrix->max_width - prev_pos; j++)
+				printf("0 ");
+			printf("\n");
+			prev_pos = 0;
+			continue;
+		}
+		//printf("(%d:%d)", matrix->arr[i].col_num, prev_pos);
+		//printf("(%d)", matrix->arr[i].col_num - prev_pos);
+		int cnt = 0;
+		for (int j = 0; j < matrix->arr[i].col_num - prev_pos - 1; j++) {
+			//printf("Pnt");
+			printf("0 ");
+			cnt++;
+		}
+		complex_print(matrix->arr[i].value.num);
+		printf(" ");
+		prev_pos = matrix->arr[i].col_num;
 	}
-}*/
+}
