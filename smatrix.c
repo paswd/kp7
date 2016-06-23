@@ -43,8 +43,12 @@ void smatrix_fill(Smatrix *matrix)
 	int row = 1;
 	Complex tmp_complex;
 	matrix->max_width = 0;
+	int prev_sym = EOF;
 
 	while ((sym = getchar()) != EOF) {
+		if (sym == '\n' && prev_sym == '\n')
+			break;
+		prev_sym = sym;
 		if (sym == ' ' || sym == '\n') {
 			tmp_str[i] = '\0';
 			tmp_complex = complex_set_value(tmp_str, 0);
