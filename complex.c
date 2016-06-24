@@ -150,6 +150,7 @@ Complex complex_set_value(char *str, int start)
 		res.re = -res.re;
 	if (is_im_minus)
 		res.im = -res.im;
+	free(tmp);
 	return res;
 }
 
