@@ -8,7 +8,7 @@
 #define QUEUE_NO_ERRORS              0 
 #define QUEUE_STACK_OVERFLOW  (1u << 0)
 #define QUEUE_STACK_UNDERFLOW (1u << 1)
-#define QUEUE_EMPTY 	-9000000000000000000
+#define QUEUE_EMPTY 	-90000000
 
 struct _queue_node {
 	Item value;

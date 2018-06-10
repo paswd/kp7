@@ -17,5 +17,5 @@ smatrix.o: smatrix.c
 queue.o: queue.c
 	gcc -c $(FLAGS) queue.c
 
-clear:
-	-rm -f *.o *.gch kp8
+clean:
+	-rm -f *.o *.gch kp7

@@ -12,7 +12,7 @@ typedef struct {
 		Numeral num;
 		int row_num;
 	} value;
-	//bool is_first_el;
+	bool is_first_el;
 } Note;
 
 
